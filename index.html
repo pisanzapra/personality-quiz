@@ -1,36 +1,34 @@
 <html>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="personality-quiz-style.css">
-
 <head>
     <title>
         Personality Quiz
     </title>
 </head>
-
 <body>
-    <div id="quiz">
-        <div id="question-wrapper">
-            Personality quiz
-            <div id="question">
+            <div id="quiz">
+                <h1>Personality quiz</h1>
+                <div id="question-wrapper">
+                    <div id="question">
+                    </div>
+                    <div>
+                        <form>
+                            <div id="answers-wrapper">
+                            </div>
+                            <div id="buttons-wrapper">
+                                <input class="quiz-button" id="next-button" type="button" value="Next question &rsaquo;&rsaquo;" onclick="nextQuestion()"
+                                />
+                                <!--  <input class="quiz-button" type="button" value="Two" onclick="feedDialog('The Chizza Whatever', 'This is the result Description', 'This is the resultCaption', 'http://res.cloudinary.com/www-claudiordgz-com/image/upload/v1436819787/19369967005_0dc811c9a0_muuode-compressor_bxvrjl.jpg')" /> -->
+                                <div id="start-again-wrapper">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="feedback" />
             </div>
-            <div>
-                <form>
-                    <div id="answers-wrapper">
-
-                    </div>
-                    <div id="buttons-wrapper">
-                    <input class="quiz-button" id="next-button" type="button" value="Next question &rsaquo;&rsaquo;" onclick="nextQuestion()" />
-                    <div id="start-again-wrapper">
-                    </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div id="feedback" />
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script type="text/javascript" src="scripts/personality-quiz.js"></script>
-
 </body>
-
 </html>

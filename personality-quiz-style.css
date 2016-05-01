@@ -1,18 +1,39 @@
 html {
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
+body{
+    background: linear-gradient( rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6) ), url(hogwarts.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+h1 {
+    line-height: 125%;
+    letter-spacing: 0.3rem;
+}
+
+#question {
+    font-size: 1.25em;
+    line-height: 125%;
+    margin-bottom: 30px;
+}
+
 #quiz {
-    font-size: 36px; 
+    font-size: 27px; 
     margin: 0 auto;
     text-align: center;
-    width: 600px;
+    width: 800px;
     padding: 30px 2%;
-    border: 4px dashed #000000;
-    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    border: 0;
+    font-family: 'Source Sans Pro', serif;
+    font-style: normal;
+    font-weight: 300;
+    color: #fff;
     line-height: 150%;
 }
 
@@ -20,19 +41,24 @@ html {
     display: none;
 }
 
-.quiz-label {    
-    border: 1px dashed #000;
+.quiz-label { 
+    width: 600px;   
+    border: 0.2px solid #fff;
     padding: 5px 10%;
     margin: 10px 0;
     display: inline-block;
 }
 
 .quiz-label:hover {
-    background-color: #E8E8E8;
+    background-color: #fff;
+    color: #000;
+    font-weight: 400;
 }
 
 .quiz-radio:checked + .quiz-label {
-    background-color: #20aedb;
+    background-color: #6ea868;
+    border: #6ea868;
+    font-weight: 400;
 }
 
 #buttons-wrapper {
@@ -40,47 +66,35 @@ html {
 }
 
 .quiz-button {
-    border: 1px solid #000000;
+    border: 0;
     background-color: #ffffff;
-    margin-top: 30px;
+    margin-top: 40px;
     padding: 10px 30px;
-    font-size: 0.5em;
-    font-family: sans-serif;
-    text-transform: uppercase;
-    box-shadow: 3px 3px 4px #888888;
+    font-size: 1em;
+    font-family: 'Source Sans Pro', serif;
+    font-style: normal;
+    font-weight: 300;
 }
 
 .quiz-button:hover {
-    background-color: #000;
+    background-color: #30372b;
     color: #fff;
     cursor: pointer;
 }
 
 .quiz-button:focus {
-    outline:0;
-    }
-    
- #next-button {
+    outline: 0;
+}
 
- }
- 
- #start-again-button {
-
- }
-
-.response {
+.result-description {
     font-size: 0.55em;
     margin-bottom: 10px;
 }
 
-.quiz-correct-answer {
-    color: #6abd45;
+.result-image {
+    font-size: 0.55em;
+    margin-bottom: 10px;
 }
-
-.quiz-incorrect-answer {
-    color: #f00f26
-}
-
 
 @media screen and (max-width: 600px) {
      
