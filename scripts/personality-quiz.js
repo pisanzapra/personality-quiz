@@ -6,6 +6,12 @@ function Question(questionText, answers) {
     this.answers = answers;
 }
 
+// creating the object type: Answer
+function Answer(answerText, scoreGroups) {
+    this.answerText = answerText;
+    this.scoreGroups = scoreGroups;
+}
+
 // creating the object type: Result
 function Result(title, image, description) {
     this.title = title;
@@ -15,9 +21,7 @@ function Result(title, image, description) {
 
 var questionWrapper = document.getElementById("question-wrapper");
 var feedback = document.getElementById("feedback");
-var answersWrapper = document.getElementById("answers-wrapper");
-var startAgainWrapper = document.getElementById("start-again-wrapper");
-
+var answersWrapper = document.getElementById("answers");
 
 //setting the starting Question number and scores (one per personality type) to 0
 var currentQuestion = 0;
@@ -30,17 +34,60 @@ var userAnswers = new Array();
 
 // creating an Array of Questions
 var allTheQuestions = new Array();
-allTheQuestions.push(new Question("The text for the question will appear here. This is where the text for the question will appear.", ["Q1 Answer A", "Q1 Answer B", "Q1 Answer C", "Q1 Answer D"]));
-allTheQuestions.push(new Question("Personality quiz question 2", ["Q2 Answer A", "Q2 Answer B", "Q2 Answer C", "Q2 Answer D"]));
-allTheQuestions.push(new Question("Personality quiz question 3", ["Q3 Answer A", "Q3 Answer B", "Q3 Answer C", "Q3 Answer D"]));
-allTheQuestions.push(new Question("Personality quiz question 4", ["Q4 Answer A", "Q4 Answer B", "Q4 Answer C", "Q4 Answer D"]));
+allTheQuestions.push(
+    new Question(
+        "The text for the question will appear here. This is where the text for the question will appear.",
+        [
+            new Answer("Q1 Answer A", ["A"]),
+            new Answer("Q1 Answer B", ["B"]),
+            new Answer("Q1 Answer C", ["C"]),
+            new Answer("Q1 Answer D", ["D", "A"])
+        ]));
+allTheQuestions.push(
+    new Question(
+        "Personality quiz question 2",
+        [
+            new Answer("Q1 Answer A", ["A"]),
+            new Answer("Q1 Answer B", ["B"]),
+            new Answer("Q1 Answer C", ["C"]),
+            new Answer("Q1 Answer D", ["D"])
+        ]));
+allTheQuestions.push(
+    new Question(
+        "Personality quiz question 3",
+        [
+            new Answer("Q1 Answer A", ["A"]),
+            new Answer("Q1 Answer B", ["B"]),
+            new Answer("Q1 Answer C", ["C"]),
+            new Answer("Q1 Answer D", ["D"])
+        ]));
+allTheQuestions.push(
+    new Question(
+        "Personality quiz question 4",
+        [
+            new Answer("Q1 Answer A", ["A"]),
+            new Answer("Q1 Answer B", ["B"]),
+            new Answer("Q1 Answer C", ["C"]),
+            new Answer("Q1 Answer D", ["D"])
+        ]));
 
 // creating an Array of Results
 var allTheResults = new Array();
-allTheResults.push(new Result("Personality A", "image-a.jpg", "Description of Personality A here"));
-allTheResults.push(new Result("Personality B", "image-b.jpg", "Description of Personality B here"));
-allTheResults.push(new Result("Personality C", "image-c.jpg", "Description of Personality C here"));
-allTheResults.push(new Result("Personality D", "image-d.jpg", "Description of Personality D here"));
+allTheResults.push(new Result("Personality A", "http://www.bygabriella.co.uk/xyz/image-a.jpg", "Description of Personality A here"));
+allTheResults.push(new Result("Personality B", "http://www.bygabriella.co.uk/xyz/image-b.jpg", "Description of Personality B here"));
+allTheResults.push(new Result("Personality C", "http://www.bygabriella.co.uk/xyz/image-c.jpg", "Description of Personality C here"));
+allTheResults.push(new Result("Personality D", "http://www.bygabriella.co.uk/xyz/image-d.jpg", "Description of Personality D here"));
+
+// shuffle an array
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i -= 1) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
+}
 
 // making the current Question appear on the page, ensuring no answers are pre-selected
 function setQuestion(questionNumber) {
@@ -55,8 +102,16 @@ function setQuestion(questionNumber) {
     // Store all the answers associated with the current Question  
     var questionAllAnswers = allTheQuestions[questionNumber].answers;
 
+    //
+    var answerOrder = [];
+    for (var i = 0; i < questionAllAnswers.length; i++) {
+        answerOrder.push(i);
+    }
+    shuffle(answerOrder);
+
     // Loop through the answers one by one and display them  
-    for (var i = 1; i <= questionAllAnswers.length; i++) {
+    for (var i = 0; i < answerOrder.length; i++) {
+        var currentAnswerIndex = answerOrder[i];
 
         var answerDiv = document.createElement('div');
 
@@ -65,12 +120,13 @@ function setQuestion(questionNumber) {
         quizRadio.name = 'answer';
         quizRadio.className = 'quiz-radio';
         quizRadio.id = 'answer' + i;
+        quizRadio.value = questionAllAnswers[currentAnswerIndex].scoreGroups.join(',');
 
         var quizRadioLabel = document.createElement('label');
         quizRadioLabel.className = 'quiz-label';
         quizRadioLabel.htmlFor = 'answer' + i;
         quizRadioLabel.id = 'answer' + i + 'label';
-        quizRadioLabel.innerHTML = questionAllAnswers[i - 1];
+        quizRadioLabel.innerHTML = questionAllAnswers[currentAnswerIndex].answerText;
 
         answerDiv.appendChild(quizRadio);
         answerDiv.appendChild(quizRadioLabel);
@@ -93,40 +149,63 @@ function displayNewQuestion(questionNumber) {
 
 // setting up the check answers function, which is triggered every time the user clicks the Next Question button
 function checkAnswer() {
-    var answerAselected = document.getElementById('answer1').checked;
-    var answerBselected = document.getElementById('answer2').checked;
-    var answerCselected = document.getElementById('answer3').checked;
-    var answerDselected = document.getElementById('answer4').checked;
+    var selectedScoreGroups = document.querySelector('input[name="answer"]:checked').value.split(',');
 
-    if (answerAselected) {
-        scoreA++;
-    }
-
-    if (answerBselected) {
-        scoreB++;
-    }
-
-    if (answerCselected) {
-        scoreC++;
-    }
-
-    if (answerDselected) {
-        scoreD++;
+    for (var i = 0; i < selectedScoreGroups.length; i++) {
+        switch (selectedScoreGroups[i]) {
+            case "A":
+                scoreA++;
+                break;
+            case "B":
+                scoreB++;
+                break;
+            case "C":
+                scoreC++;
+                break;
+            case "D":
+                scoreD++;
+                break;
+        }
     }
 }
 
+function shareToFacebook() {
+    var dominantPersonality = getDominantPersonality();
+    feedDialog(dominantPersonality.title, dominantPersonality.description, dominantPersonality.caption, dominantPersonality.image);
+}
 
 
 function revealPersonality(largestType) {
-    feedback.innerHTML = "Your dominant personality type is " + largestType.title;
-    var resultImage = document.createElement('div');
-    resultImage.classname = 'result-image';
-    resultImage.innerHTML = "<img src='" + largestType.image + "' />";
-    feedback.appendChild(resultImage);
-    var resultDescription = document.createElement('div');
-    resultDescription.classname = 'result-description';
+
+    var resultTitle = document.getElementById("result-title");
+    var resultImage = document.getElementById('result-image');
+    var resultDescription = document.getElementById('result-description');
+    resultTitle.innerHTML = "Your dominant personality type is " + largestType.title;
+    resultImage.src = largestType.image;
     resultDescription.innerHTML = largestType.description;
-    feedback.appendChild(resultDescription);
+    $("#feedback").show();
+}
+
+function getDominantPersonality() {
+
+    var largest = Math.max(scoreA, scoreB, scoreC, scoreD);
+
+    if (scoreA == largest) {
+        return allTheResults[0];
+    }
+    else if (scoreB == largest) {
+        return allTheResults[1];
+    }
+    else if (scoreC == largest) {
+        return allTheResults[2];
+    }
+    else if (scoreD == largest) {
+        return allTheResults[3];
+    }
+    else {
+        return null;
+    }
+
 }
 
 
@@ -135,40 +214,20 @@ function showResults() {
 
     questionWrapper.innerHTML = " ";
 
-    var largest = Math.max(scoreA, scoreB, scoreC, scoreD);
+    var dominantPersonality = getDominantPersonality();
 
-    if (scoreA == largest) {
-        revealPersonality(allTheResults[0]);
-    }
+    revealPersonality(dominantPersonality);
 
-    else if (scoreB == largest) {
-        revealPersonality(allTheResults[1]);
-    }
-    else if (scoreC == largest) {
-        revealPersonality(allTheResults[2]);
-    }
-
-    else if (scoreD == largest) {
-        revealPersonality(allTheResults[3]);
-    }
-    else {
-        feedback.innerHTML = "Oops! Something went wrong there";
-    }
+    // just for the sake of debugging    
+    console.log("A: " + scoreA);
+    console.log("B: " + scoreB);
+    console.log("C: " + scoreC);
+    console.log("D: " + scoreD);
 }
 
 function hasUserSelectedAnAnswer() {
-
-    var numberofAnswers = allTheQuestions[currentQuestion].answers.length;
-
-    for (var i = 1; i <= numberofAnswers; i++) {
-        if (document.getElementById('answer' + i).checked) {
-            // if false, doesn't return ANYTHING. Moves on to next answer radio button
-            // when the statement evaluates to true, evaluates hasUserSelectedAnAnswer as true in this instance and stops running the loop. Done!
-            return true;
-        }
-    }
-    // By this point, the loop has looked at every radio button and still not found one that has been checked. Therefore, the statement must be false.
-    return false;
+    // browser returns all checked answers, code checks length of array is one - if so, returns true
+    return document.querySelectorAll('input[name="answer"]:checked').length == 1;
 }
 
 function nextQuestion() {

@@ -23,7 +23,7 @@ h1 {
     margin-bottom: 30px;
 }
 
-#quiz {
+#quiz-wrapper {
     font-size: 27px; 
     margin: 0 auto;
     text-align: center;
@@ -61,14 +61,14 @@ h1 {
     font-weight: 400;
 }
 
-#buttons-wrapper {
+#buttons {
     display: block;
 }
 
 .quiz-button {
     border: 0;
     background-color: #ffffff;
-    margin-top: 40px;
+    margin-top: 15px;
     padding: 10px 30px;
     font-size: 1em;
     font-family: 'Source Sans Pro', serif;
@@ -86,25 +86,40 @@ h1 {
     outline: 0;
 }
 
-.result-description {
-    font-size: 0.55em;
-    margin-bottom: 10px;
+#feedback {
+    display: none;
 }
 
-.result-image {
-    font-size: 0.55em;
+#result-title {
+    margin-bottom: 30px;
+}
+
+#result-image {
+    margin-bottom: 20px;
+}
+
+#result-description {
     margin-bottom: 10px;
 }
 
 @media screen and (max-width: 600px) {
      
-    #quiz {
+    #quiz-wrapper {
         width: 100%;
         font-size: 2em;
         line-height: 78%;
+        padding: 0;
     }
     
+    .quiz-label { 
+    width: 100%;   
+    }
+
     .quiz-button {
         width: 80%;
+    }
+    
+    h1 {
+    font-size: 1.5em;
     }
 }
