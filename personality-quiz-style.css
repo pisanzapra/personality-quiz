@@ -7,9 +7,12 @@ html {
 }
 
 body{
-    background: linear-gradient( rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6) ), url(hogwarts.jpg);
+    background: url(images/mountains.jpg);
+    background-color: #001e3d;
     background-repeat: no-repeat;
+    background-size: cover;
     background-position: center center;
+    background-attachment: fixed;
 }
 
 h1 {
@@ -23,6 +26,11 @@ h1 {
     margin-bottom: 30px;
 }
 
+input { 
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
 #quiz-wrapper {
     font-size: 27px; 
     margin: 0 auto;
@@ -33,7 +41,7 @@ h1 {
     font-family: 'Source Sans Pro', serif;
     font-style: normal;
     font-weight: 300;
-    color: #fff;
+    color:#003366;
     line-height: 150%;
 }
 
@@ -43,21 +51,21 @@ h1 {
 
 .quiz-label { 
     width: 600px;   
-    border: 0.2px solid #fff;
+    border: 1px solid #003366;
     padding: 5px 10%;
     margin: 10px 0;
     display: inline-block;
 }
 
 .quiz-label:hover {
-    background-color: #fff;
-    color: #000;
-    font-weight: 400;
+    background-color: #001e3d;
+    color: #fff;
 }
 
 .quiz-radio:checked + .quiz-label {
-    background-color: #6ea868;
-    border: #6ea868;
+    background-color: #001e3d;
+    border: #001e3d;
+    color: #fff;
     font-weight: 400;
 }
 
@@ -77,7 +85,7 @@ h1 {
 }
 
 .quiz-button:hover {
-    background-color: #30372b;
+    background-color: #003366;
     color: #fff;
     cursor: pointer;
 }
@@ -92,6 +100,7 @@ h1 {
 
 #result-title {
     margin-bottom: 30px;
+    font-weight: bold;
 }
 
 #result-image {
@@ -102,17 +111,23 @@ h1 {
     margin-bottom: 10px;
 }
 
-@media screen and (max-width: 600px) {
-     
+
+@media screen and (max-width: 700px) {
+
+
+body{
+    background-position: center top;
+}
     #quiz-wrapper {
         width: 100%;
-        font-size: 2em;
+        font-size: 1em;
         line-height: 78%;
-        padding: 0;
+        padding: 10px;
     }
     
     .quiz-label { 
-    width: 100%;   
+        width: 100%;  
+        line-height: 150%; 
     }
 
     .quiz-button {
@@ -120,6 +135,22 @@ h1 {
     }
     
     h1 {
-    font-size: 1.5em;
+        font-size: 1.5em;
+        letter-spacing: 0.1rem;
     }
+    
+    #result-image {
+        max-width: 100%;
+        height: auto;
+        width: auto\9;
+    } 
+    
+    #result-title {
+        line-height: 150%;
+    }
+    
+    #result-description {
+        line-height: 150%;
+    }
+    
 }

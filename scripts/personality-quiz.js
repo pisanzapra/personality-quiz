@@ -25,10 +25,10 @@ var answersWrapper = document.getElementById("answers");
 
 //setting the starting Question number and scores (one per personality type) to 0
 var currentQuestion = 0;
-var scoreA = 0;
-var scoreB = 0;
-var scoreC = 0;
-var scoreD = 0;
+var scoreA = 0; // Florence
+var scoreB = 0; // Vancouver
+var scoreC = 0; // Tokyo
+var scoreD = 0; // Edinburgh
 
 var userAnswers = new Array();
 
@@ -36,47 +36,69 @@ var userAnswers = new Array();
 var allTheQuestions = new Array();
 allTheQuestions.push(
     new Question(
-        "The text for the question will appear here. This is where the text for the question will appear.",
+        "Which food can you not get enough of?",
         [
-            new Answer("Q1 Answer A", ["A"]),
-            new Answer("Q1 Answer B", ["B"]),
-            new Answer("Q1 Answer C", ["C"]),
-            new Answer("Q1 Answer D", ["D", "A"])
+            new Answer("Pizza", ["A"]),
+            new Answer("Burgers", ["B"]),
+            new Answer("Sushi", ["C"]),
+            new Answer("I like a variety of foods", ["D"])
         ]));
 allTheQuestions.push(
     new Question(
-        "Personality quiz question 2",
+        "Would you be happy to learn the basics of a new language in preparation for your trip?",
         [
-            new Answer("Q1 Answer A", ["A"]),
-            new Answer("Q1 Answer B", ["B"]),
-            new Answer("Q1 Answer C", ["C"]),
-            new Answer("Q1 Answer D", ["D"])
+            new Answer("No, I don't want to waste time bothering with that", ["B", "C"]),
+            new Answer("Of course, it's an essential part of the experience for me", ["A", "C"])
         ]));
 allTheQuestions.push(
     new Question(
-        "Personality quiz question 3",
+        "How do you handle crowds?",
         [
-            new Answer("Q1 Answer A", ["A"]),
-            new Answer("Q1 Answer B", ["B"]),
-            new Answer("Q1 Answer C", ["C"]),
-            new Answer("Q1 Answer D", ["D"])
+            new Answer("Hate them! Get me away from all the noise", ["A", "D"]),
+            new Answer("Love them! I thrive on the buzz of big cities", ["B", "C"])
         ]));
 allTheQuestions.push(
     new Question(
-        "Personality quiz question 4",
+        "What's your favourite thing about being on holiday?",
         [
-            new Answer("Q1 Answer A", ["A"]),
-            new Answer("Q1 Answer B", ["B"]),
-            new Answer("Q1 Answer C", ["C"]),
-            new Answer("Q1 Answer D", ["D"])
+            new Answer("Admiring works of art and learning all about the history of a new place", ["A"]),
+            new Answer("The night life - there's nothing I love more than stumbling across an interesting bar or seeing a new play", ["D"]),
+            new Answer("Exploring the great outdoors and photographing beautiful scenery", ["B"]),
+            new Answer("Simply walking around and noticing the little things that make a place unique", ["C"])
+        ]));
+allTheQuestions.push(
+    new Question(
+        "What kind of weather are you hoping for on your trip?",
+        [
+            new Answer("Hot and sunny of course - it's summer!", ["A", "C"]),
+            new Answer("Warm but mild, please. I can't cope with excessive amounts of sun", ["B"]),
+            new Answer("I don't mind. Hell, give me a bit of rain for all I care", ["D"])
         ]));
 
 // creating an Array of Results
 var allTheResults = new Array();
-allTheResults.push(new Result("Personality A", "http://www.bygabriella.co.uk/xyz/image-a.jpg", "Description of Personality A here"));
-allTheResults.push(new Result("Personality B", "http://www.bygabriella.co.uk/xyz/image-b.jpg", "Description of Personality B here"));
-allTheResults.push(new Result("Personality C", "http://www.bygabriella.co.uk/xyz/image-c.jpg", "Description of Personality C here"));
-allTheResults.push(new Result("Personality D", "http://www.bygabriella.co.uk/xyz/image-d.jpg", "Description of Personality D here"));
+allTheResults.push(
+    new Result(
+        "Florence",
+        "images/florence.jpg",
+        "Pizza, art, history - what's not to like about Florence? And with temperatures averaging around 28 degrees in the peak of summer, you can soak up the sun as well as the local culture."
+    ));
+allTheResults.push(
+    new Result("Vancouver",
+        "images/vancouver.jpg",
+        "Set against the backdrop of the Rocky Mountains, Vancouver is one of the world's most beautiful cities. Whether it's a bike ride along the Stanley Park sea wall, shopping on Robson Street or a trip to Grouse Mountain to see the bears, there's sure to be something to make you fall in love with BC's capital."
+    ));
+allTheResults.push(
+    new Result(
+        "Tokyo",
+        "images/tokyo.jpg",
+        "There's so much to see in this vibrant city. Just walking around and noticing all the wacky themed restaurants, quirky fashions and massive malls is an experience in itself. As well as being a skyscraper jungle and capital of consumerism though, Tokyo also offers visitors opportunities to encounter the serene side of traditional Japan."
+    ));
+allTheResults.push(
+    new Result(
+        "Edinburgh",
+        "images/edinburgh.jpg",
+        "Edinburgh is the perfect staycation destination. There's no need to carry around a phrase book, but this Scottish city has plenty to make it a worthy tourist hotspot. During the day, visit the stunning Edinburgh castle or go hiking up the famous Arthur's Seat. Come evening, have a pint in one of the city's unusual bars or experience Edinburgh's thriving comedy scene."));
 
 // shuffle an array
 function shuffle(a) {
@@ -180,7 +202,7 @@ function revealPersonality(largestType) {
     var resultTitle = document.getElementById("result-title");
     var resultImage = document.getElementById('result-image');
     var resultDescription = document.getElementById('result-description');
-    resultTitle.innerHTML = "Your dominant personality type is " + largestType.title;
+    resultTitle.innerHTML = "Your ideal summer holiday destination is " + largestType.title;
     resultImage.src = largestType.image;
     resultDescription.innerHTML = largestType.description;
     $("#feedback").show();
@@ -278,11 +300,11 @@ function feedDialog(resultName, resultDescription, resultCaption, resultImage) {
     FB.ui(
         {
             method: 'feed',
-            name: resultName,
+            name: "I got " + resultName + "! What's your ideal summer holiday destination?",
             link: window.location.href,
-            description: resultDescription,
+            description: "Click here to take the quiz and find out!",
             caption: resultCaption,
-            picture: resultImage,
+            picture: window.location.href + resultImage,
             /*display: 'popup'*/
         },
         function (response, show_error) {
