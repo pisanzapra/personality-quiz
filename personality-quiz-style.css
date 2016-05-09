@@ -36,7 +36,6 @@ input {
     margin: 0 auto;
     text-align: center;
     width: 800px;
-    padding: 30px 2%;
     border: 0;
     font-family: 'Source Sans Pro', serif;
     font-style: normal;
@@ -116,7 +115,8 @@ input {
 
 
 body{
-    background-position: center top;
+	background: url(images/mountains-mobile-31kb.jpg);
+	background-position: bottom center;
 }
     #quiz-wrapper {
         width: 100%;
