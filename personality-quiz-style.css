@@ -111,11 +111,11 @@ input {
 }
 
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 816px) {
 
 
 body{
-	background: url(images/mountains-mobile-31kb.jpg);
+	background: url(images/mountains-mobile-2.jpg);
 	background-position: bottom center;
 }
     #quiz-wrapper {
